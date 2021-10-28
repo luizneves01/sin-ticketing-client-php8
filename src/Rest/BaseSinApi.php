@@ -49,17 +49,15 @@ abstract class BaseSinApi
 
         $header = array_merge($headerMain,$header);
 
-        $response = $this->client->post($url,['body'=>json_encode($data),'headers'=>$header]);
-        // $body = $response->getBody();
-        // $conteudo = '';
-        // while (!$body->eof()) {
-        //     $conteudo .= $body->read(1024);
-        // }
+        $response = null;
+        try {
+            $response = $this->client->post($url,['body'=>json_encode($data),'headers'=>$header]);
+        } catch (\GuzzleHttp\Exception\ClientException  $e) {
+            // dump($e->getRequest());
+            // dump($e->getResponse());
+            $response = $e->getResponse();
+        }
 
-        // if($response->getStatusCode() >= 400)
-        // throw new \Exception($conteudo);
-
-        // return json_decode($conteudo);
         return new Response($response);
     }
 

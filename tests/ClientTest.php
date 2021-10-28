@@ -51,14 +51,28 @@ class PdfTest extends TestCase
         $this->assertEquals(201, $response->status());
     }
 
-    public function testView(): void
+    public function testStoreUsuarioError(): void
     {
-        $response = \SinTicketingClient::getUsuarios();
+        $res = \SinTicketingClient::login();
+        $this->assertEquals(200, $res->status());
 
+        $data = [        
+            'codigo' => '01',
+            // 'nome' => 'Teste Usuário Teste',
+            'email' => 'teste@bergamo.com',
+            'status' => 'A',
+            'permissao' => 'Admin',
+            'grupoEconomico' => '',
+            'criadoEm' => '2010-01-01 10:11:02',
+            'atualizadoEm' => '2010-01-01 10:11:02',
+        ];
+
+        $response = \SinTicketingClient::storeUsuario($data);
+        /** @var Response $response */
         $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertNotEmpty($response->body());
         $this->assertEquals('application/json', $response->header('Content-Type'));
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(422, $response->status());
     }
 
 }
