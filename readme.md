@@ -1,6 +1,6 @@
 ## Sin-Ticketing Client for Laravel
 
-### Laravel wrapper for [Dompdf HTML to PDF Converter](https://github.com/dompdf/dompdf)
+### Laravel SDK client for [Sin-Ticketing](https://sinticketing.sinsolution.com.br)
 
 Require this package in your composer.json and update composer. This will download the package and the dompdf + fontlib libraries also.
 
@@ -45,4 +45,4 @@ You can also use your ConfigProvider to set certain keys.
     
 ### License
 
-This DOMPDF Wrapper for Laravel is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+This Sin Ticketing Client for Laravel is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
