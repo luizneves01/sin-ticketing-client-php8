@@ -1,0 +1,43 @@
+{
+    "name": "hillus/sin-ticketing-client",
+    "description": "Cliente Sin-Ticketing",
+    "license": "MIT",
+    "keywords": ["laravel", "sin-ticketing", "api","client"],
+    "autoload": {
+        "psr-4": {
+            "Hillus\\SinTicketingClient\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hillus\\SinTicketingClient\\Tests\\": "tests"
+        }
+    },
+    "authors": [
+        {
+            "name": "Hillus Hilbert",
+            "email": "hillus.hilbert@codding.com.br"
+        }
+    ],
+    "require": {
+        "php": "^7.1.3",
+        "guzzlehttp/guzzle": "^6.5",
+        "illuminate/support": "^5.5|^6|^7|^8"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.8-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Hillus\\SinTicketingClient\\ServiceProvider"
+            ],
+            "aliases": {
+                "SinTicketingClient": "Hillus\\SinTicketingClient\\Facade"
+            }
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4|^5|^6"
+    }
+}
