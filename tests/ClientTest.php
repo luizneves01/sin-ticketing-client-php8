@@ -32,23 +32,26 @@ class PdfTest extends TestCase
         $res = \SinTicketingClient::login();
         $this->assertEquals(200, $res->status());
 
-        $data = [        
-            'codigo' => '01',
-            'nome' => 'Teste Usuário Teste',
-            'email' => 'teste@bergamo.com',
-            'status' => 'A',
-            'permissao' => 'Admin',
-            'grupoEconomico' => '',
-            'criadoEm' => '2010-01-01 10:11:02',
-            'atualizadoEm' => '2010-01-01 10:11:02',
-        ];
+        for($i=1;$i<=4;$i++)
+        {
+            $data = [        
+                'codigo' => str_pad($i,4,'0',STR_PAD_LEFT),
+                'nome' => 'Teste Usuário Teste '.$i,
+                'email' => 'usuario'.$i.'@test.com',
+                'status' => 'A',
+                'permissao' => 'Admin',
+                'grupoEconomico' => '',
+                'criadoEm' => '2010-01-01 10:11:02',
+                'atualizadoEm' => '2010-01-01 10:11:02',
+            ];
 
-        $response = \SinTicketingClient::storeUsuario($data);
-        /** @var Response $response */
-        $this->assertInstanceOf(ResponseInterface::class, $response);
-        $this->assertNotEmpty($response->body());
-        $this->assertEquals('application/json', $response->header('Content-Type'));
-        $this->assertEquals(201, $response->status());
+            $response = \SinTicketingClient::storeUsuario($data);
+            /** @var Response $response */
+            $this->assertInstanceOf(ResponseInterface::class, $response);
+            $this->assertNotEmpty($response->body());
+            $this->assertEquals('application/json', $response->header('Content-Type'));
+            $this->assertEquals(201, $response->status());
+        }
     }
 
     public function testStoreUsuarioError(): void
