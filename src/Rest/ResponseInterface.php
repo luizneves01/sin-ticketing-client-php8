@@ -40,4 +40,6 @@ interface ResponseInterface
     public function header($header) : string;
 
     public function headers() : array;
+
+    public function error() : string;
 }

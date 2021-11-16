@@ -65,4 +65,8 @@ class Response implements ResponseInterface
         return $return;
     }
 
+    public function error(): string {
+        return $this->body();
+    }
+
 }
