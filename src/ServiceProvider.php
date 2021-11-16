@@ -30,7 +30,7 @@ class ServiceProvider extends IlluminateServiceProvider
        
         // $this->app->alias('sinticketing', SinApi::class);
 
-        $this->app->bind('sinticketing', function ($app) {
+        $this->app->singleton('sinticketing', function ($app) {
             return new SinApi($app['config'], $app['files']);
         });
 
