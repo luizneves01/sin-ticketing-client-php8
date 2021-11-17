@@ -6,7 +6,7 @@ use Hillus\SinTicketingClient\Facade;
 use Hillus\SinTicketingClient\Rest\ResponseInterface;
 
 
-class PdfTest extends TestCase
+class ClientTest extends TestCase
 {
     public function testAlias(): void
     {
@@ -46,15 +46,17 @@ class PdfTest extends TestCase
             ];
 
             $response = \SinTicketingClient::storeUsuario($data);
+            // dump($response->body());
             /** @var Response $response */
             $this->assertInstanceOf(ResponseInterface::class, $response);
             $this->assertNotEmpty($response->body());
             $this->assertEquals('application/json', $response->header('Content-Type'));
             $this->assertEquals(201, $response->status());
+            
         }
     }
 
-    public function testStoreUsuarioError(): void
+    public function testStoreUsuarioErrorNome(): void
     {
         $res = \SinTicketingClient::login();
         $this->assertEquals(200, $res->status());
@@ -76,6 +78,37 @@ class PdfTest extends TestCase
         $this->assertNotEmpty($response->body());
         $this->assertEquals('application/json', $response->header('Content-Type'));
         $this->assertEquals(422, $response->status());
+        $this->assertNotEmpty($response->error()->errors->nome);
+        
     }
+
+    public function testStoreUsuarioErrorEmail(): void
+    {
+        $res = \SinTicketingClient::login();
+        $this->assertEquals(200, $res->status());
+
+        $data = [        
+            'codigo' => '01',
+            'nome' => 'Teste Usuário Teste',
+            'email' => 'teste.',
+            'status' => 'A',
+            'permissao' => 'Admin',
+            'grupoEconomico' => '',
+            'criadoEm' => '2010-01-01 10:11:02',
+            'atualizadoEm' => '2010-01-01 10:11:02',
+        ];
+
+        $response = \SinTicketingClient::storeUsuario($data);
+        // dump(__METHOD__);
+        // dump($response->body());
+        /** @var Response $response */
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertNotEmpty($response->body());
+        $this->assertEquals('application/json', $response->header('Content-Type'));
+        $this->assertEquals(422, $response->status());
+        $this->assertNotEmpty($response->error()->errors->email);
+        
+    }
+
 
 }

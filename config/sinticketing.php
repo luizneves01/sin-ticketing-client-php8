@@ -15,4 +15,5 @@ return [
     'api_base_url' => 'http://localhost:8080',
     'api_sin_user' => 'bergamo@bergamo.com',
     'api_sin_password' => '@Desenv123',
+    'debug' => false,
 ];

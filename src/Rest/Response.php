@@ -8,6 +8,7 @@ class Response implements ResponseInterface
 {
 
     private $response;
+    private $conteudo;
 
     public function __construct(ResponseInterfaceGuzzle $response)
     {
@@ -21,18 +22,16 @@ class Response implements ResponseInterface
 
     public function body(): string
     {
-        static $conteudo;
-
-        if(empty($conteudo))
+        if(empty($this->conteudo))
         {
             $body = $this->response->getBody();
-            $conteudo = '';
+            $this->conteudo = '';
             while (!$body->eof()) {
-                $conteudo .= $body->read(1024);
+                $this->conteudo .= $body->read(1024);
             }
         }
         
-        return $conteudo;
+        return $this->conteudo;
     }
 
     public function json()
@@ -65,7 +64,12 @@ class Response implements ResponseInterface
         return $return;
     }
 
-    public function error(): string {
+    public function error() {
+        
+        if($this->header('Content-Type') == 'application/json'){
+            return $this->json();
+        }
+
         return $this->body();
     }
 

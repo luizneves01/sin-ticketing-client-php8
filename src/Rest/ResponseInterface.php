@@ -41,5 +41,5 @@ interface ResponseInterface
 
     public function headers() : array;
 
-    public function error() : string;
+    public function error();
 }

@@ -48,17 +48,24 @@ abstract class BaseSinApi
         ];
 
         $header = array_merge($headerMain,$header);
-
         $response = null;
-        try {
-            $response = $this->client->post($url,['body'=>json_encode($data),'headers'=>$header]);
-        } catch (\GuzzleHttp\Exception\ClientException  $e) {
-            // dump($e->getRequest());
-            // dump($e->getResponse());
+        try 
+        {
+            $debug = $this->config->get('sinticketing.debug', false);
+
+            $options = [
+                'body'=>json_encode($data),
+                'headers'=>$header,
+                'debug' => $debug
+            ];
+
+            $response = $this->client->post($url,$options);
+        } 
+        catch (\GuzzleHttp\Exception\ClientException  $e) 
+        {
             $response = $e->getResponse();
         }
-
-        return new Response($response);
+        return new Response($response);        
     }
 
     protected function get($url,$header=[])  : ResponseInterface
@@ -72,16 +79,7 @@ abstract class BaseSinApi
 
         $response = $this->client->get($url,['headers'=>$header]);
         return new Response($response);
-        // $body = $response->getBody();
-        // $conteudo = '';
-        // while (!$body->eof()) {
-        //     $conteudo .= $body->read(1024);
-        // }
 
-        // if($response->getStatusCode() >= 400)
-        // throw new \Exception($conteudo);
-
-        // return json_decode($conteudo);
     }
 
     public function login()
