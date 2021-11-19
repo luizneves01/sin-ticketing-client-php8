@@ -25,6 +25,7 @@ class ClientTest extends TestCase
         /** @var Response $response */
         $this->assertTrue(isset($response->projetoId));
         $this->assertNotEmpty($response->accessToken);
+        $this->assertEquals(Facade::tokenIsExpired(),false);
     }
 
     public function testSendUsuario(): void

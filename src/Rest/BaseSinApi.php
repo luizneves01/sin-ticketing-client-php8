@@ -16,6 +16,8 @@ abstract class BaseSinApi
     protected $_accessToken;
     protected $_encryptedAccessToken;
 
+    protected $willExpiresAt = null;
+
     protected $client;
 
     /** @var \Illuminate\Contracts\Config\Repository  */
@@ -82,12 +84,16 @@ abstract class BaseSinApi
 
     }
 
-    public function login()
+    public function login($user=null,$pass=null)
     {
+        $user = $user ?? $this->userApi;
+        $pass = $pass ?? $this->passwordApi;
+        
         $url = $this->base_url.'/api/login';
+
         $response = $this->post($url, [
-                            "email" => $this->userApi,
-                            "password" => $this->passwordApi,
+                            "email" => $user,
+                            "password" => $pass,
                         ]);
         
 
@@ -102,10 +108,22 @@ abstract class BaseSinApi
         $this->_expireInSeconds = $r->expireInSeconds;
         $this->_userId = $r->userId;
 
+        // guarda quando será necessário fazer novo login
+        $this->willExpiresAt = date("Y-m-d H:i:s", time() + $this->_expireInSeconds);
+
+        $debug = $this->config->get('sinticketing.debug', false);
+
+        if($debug){
+            dump($this->willExpiresAt);
+        }
+
         return $response;
     }
 
-    
+    public function tokenIsExpired()
+    {
+        return ($this->willExpiresAt < date('Y-m-d H:i:s')) ? true : false;
+    }
 
     
 }

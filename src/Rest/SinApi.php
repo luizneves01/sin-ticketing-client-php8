@@ -10,7 +10,7 @@ class SinApi extends BaseSinApi
     {
         $url = $this->base_url.'/api/usuario';
 
-        if(!$this->_accessToken)
+        if(!$this->_accessToken || $this->tokenIsExpired())
         $this->login();
         
         $headers = [
@@ -27,7 +27,8 @@ class SinApi extends BaseSinApi
 
     public function storeUsuario($data)
     {
-        if(!$this->_accessToken)
+        
+        if(!$this->_accessToken || $this->tokenIsExpired())
         $this->login();
 
         $url = $this->base_url."/api/usuario";
