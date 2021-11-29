@@ -111,5 +111,29 @@ class ClientTest extends TestCase
         
     }
 
+    public function testDeleteUsuarios(): void
+    {
+        $projeto = 2;
+        $periodo = date('Ym');
+        $response = \SinTicketingClient::deleteUsuarios($projeto,$periodo);
+        // dump(__METHOD__);
+        // dump($response->body());
+        /** @var Response $response */
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertEquals(204, $response->status());
+    }
+
+    public function testDeleteUsuariosNaoAutorizado(): void
+    {
+        $projeto = 3;
+        $periodo = date('Ym');
+        $response = \SinTicketingClient::deleteUsuarios($projeto,$periodo);
+        // dump(__METHOD__);
+        // dump($response->body());
+        /** @var Response $response */
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertEquals(403, $response->status());
+        $this->assertEquals("This action is unauthorized.", $response->json()->message);
+    }
 
 }

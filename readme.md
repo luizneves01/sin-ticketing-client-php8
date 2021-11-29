@@ -30,6 +30,16 @@ Para alterar a configuração, copie o arquivo config para a sua pasta config e 
 $app->configure('sinTicketing');
 
 Using
+
+## Métodos 
+
+ - **SinTicketingClient::login()** - Realiza a autenticação com API retornando o JWT Token
+ - **SinTicketingClient::storeUsuario()** - Realiza inclusão de um novo usuário
+ - **SinTicketingClient::getUsuarios()** - Retorna lista de usuários do período atual
+ - **SinTicketingClient::deleteUsuarios()** - Remove os usuarios por projeto e periodo
+ - **SinTicketingClient::getUsoIntegracao()** - Retorna lista de uso da integracao por projeto e periodo
+
+
 ## Using
 
 Você pode receber uma instancia do cliente a partir do exemplo abaixo

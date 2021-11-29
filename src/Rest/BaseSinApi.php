@@ -84,6 +84,34 @@ abstract class BaseSinApi
 
     }
 
+    protected function delete($url,$header=[])  : ResponseInterface
+    {
+        $headerMain = [
+            'Content-Type'=>'application/json',
+            'accept'=>'application/json',
+        ];
+
+        $header = array_merge($headerMain,$header);
+        $response = null;
+        try 
+        {
+            $debug = $this->config->get('sinticketing.debug', false);
+
+            $options = [
+                'headers'=>$header,
+                'debug' => $debug
+            ];
+
+            $response = $this->client->delete($url,$options);
+        } 
+        catch (\GuzzleHttp\Exception\ClientException  $e) 
+        {
+            $response = $e->getResponse();
+        }
+        return new Response($response);
+
+    }
+
     public function login($user=null,$pass=null)
     {
         $user = $user ?? $this->userApi;
