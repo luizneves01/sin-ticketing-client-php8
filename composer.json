@@ -1,6 +1,6 @@
 {
-    "name": "hillus/sin-ticketing-client",
-    "description": "Cliente Sin-Ticketing",
+    "name": "hillus/sin-ticketing-clientphp8",
+    "description": "Cliente Sin-Ticketing php8",
     "license": "MIT",
     "keywords": ["laravel", "sin-ticketing", "api","client"],
     "autoload": {
@@ -17,6 +17,10 @@
         {
             "name": "Hillus Hilbert",
             "email": "hillus.hilbert@codding.com.br"
+        },
+        {
+            "name": "Luiz Felipe",
+            "email": "felipe.neves@codding.com.br"
         }
     ],
     "require": {
