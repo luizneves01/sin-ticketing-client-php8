@@ -1,5 +1,5 @@
 {
-    "name": "felipe/sin-ticketing-clientphp8",
+    "name": "lftn01/sin-ticketing-clientphp8",
     "description": "Cliente Sin-Ticketing php8",
     "license": "MIT",
     "keywords": ["laravel", "sin-ticketing", "api","client"],
