@@ -1,10 +1,14 @@
 ## Sin-Ticketing Client for Laravel
 
+## Importante
+
+Sem alterações significativas, apenas o composer.json foi alterado para aceitar o php8, devido a falta de acesso um fork do pacote original foi criado.
+
 ### Laravel SDK client for [Sin-Ticketing](https://sinticketing.sinsolution.com.br)
 
 Require this package in your composer.json and update composer. This will download the package and the dompdf + fontlib libraries also.
 
-    composer require hillus/sin-ticketing-client
+    composer require lftn01/sin-ticketing-clientphp8
 
 ## Installation
 
